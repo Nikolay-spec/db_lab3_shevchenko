@@ -14,13 +14,13 @@ con = psycopg2.connect(user=username, password=password, dbname=database, host=h
 
 #opening team csv file and
 #writing it into created erlier a data base tables
-df = pd.read_csv("club.csv", sep=",")
+df = pd.read_csv("club.csv")
 with con:
     cur = con.cursor()
-    cur.execute("DELETE FROM clubs;")
+    cur.execute("DELETE FROM Clubs;")
     for ind in df.index:
         query = f'''
-INSERT INTO clubs(team_id,
+INSERT INTO Clubs(team_id,
                     team_name)
 VALUES ({df['id'][ind]}, '{df['club'][ind]}');
 
@@ -46,8 +46,7 @@ VALUES ({df['id'][ind]}, '{df['nationality'][ind]}');
 
 #opening palyers csv file and
 #writing it into created erlier a data base tables
-df = pd.read_csv("players.csv", sep=";")
-
+df = pd.read_csv("players.csv", sep=';')
 with con:
     cur = con.cursor()
     cur.execute("DELETE FROM players;")
@@ -73,4 +72,3 @@ VALUES ({df['Player_id'][ind]},
 
 '''
         cur.execute(query)
-
